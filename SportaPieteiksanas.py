@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extras
 from tkinter import *
 from tkinter.ttk import *
+from tkinter import messagebox
 
 DB_HOST="mouse.db.elephantsql.com"
 DB_NAME="qikaguov"
@@ -31,9 +32,14 @@ def submit():
     sports=combo.get()
     
     cur.execute('INSERT INTO Dati VALUES (%s,%s,%s)', (vards,uzvards,sports))
+    messagebox.showinfo('Paldies', 'Paldies par reģistrēšanos')
     conn.commit()
     cur.close()
     conn.close()
+
+def exit():
+    messagebox.showinfo('Uzredzēšanos', 'Uzredzēšanos')
+    window.destroy()
     
 emptylbl0 = Label(window, text="        ")
 emptylbl0.grid(column=0, row=0)
@@ -84,7 +90,7 @@ btn0 = Button(window, text="Apstiprināt", command=submit)
 btn0.grid(column=1, row=8)
 btn2 = Button(window, text="Nodzēst", command=delete)
 btn2.grid(column=2, row=8)
-btn4 = Button(window, text="Iziet", command=window.destroy)
+btn4 = Button(window, text="Iziet", command=exit)
 btn4.grid(column=3, row=8)
 
 
